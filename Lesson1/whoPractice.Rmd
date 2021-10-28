@@ -1,0 +1,44 @@
+---
+title: "The Analytics Edge Lesson 1"
+output: html_notebook
+---
+
+This data is from the World Health Organization.
+
+First step is to set up R environment by reading in libraries. 
+
+```{r}
+library(tidyverse)
+library(here)
+```
+Next step is to read in the data and to look at the structure of data.
+This is a good step to know whether or not the variables in the dataset are in the right data type.
+
+```{r}
+WHO <- read_csv("WHO.csv")
+glimpse(WHO)
+```
+
+By using the glimpse function we can see that FertilityRate, LiteracyRate, GNI, PrimarySchoolEnrollmentMale, and PrimarySchool EnrollmentFemale are read in as character variables instead of numerical variables. We need to use coercion in order to get these variables in the right data types. If we don't then will not be able to perform statistical analyzes on them.
+
+```{r}
+WHO$FertilityRate <- as.double(WHO$FertilityRate)
+glimpse(WHO)
+```
+
+Notice that FertilityRate is now a double instead of a character.
+Next lets change the data types for the rest of the variables.
+
+```{r}
+WHO_clean <- WHO %>% mutate(across(LiteracyRate:PrimarySchoolEnrollmentFemale, ~as.double((.))))
+glimpse(WHO_clean)
+```
+
+```{r}
+WHO_clean <- WHO_clean %>% mutate(across(Country:Region, ~as.factor((.))))
+glimpse(WHO_clean)
+```
+
+```{r}
+summary(WHO_clean)
+```
