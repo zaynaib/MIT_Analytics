@@ -113,7 +113,36 @@ tidyStocks %>% filter(year(Date)  >= 2004 & year(Date) <= 2005) %>%
 
 #problem 4.1
 
+tapply(IBM$StockPrice,month(IBM$Date),mean)
+
+IBM %>%
+  group_by(month(IBM$Date)) %>%
+  summarise(mean=mean(StockPrice)) %>%
+  as.data.frame()
+
+mean(IBM$StockPrice)
+
+#January - May
+
 #problem 4.2
+tapply(GE$StockPrice,month(GE$Date),mean)
+
+mean(GE$StockPrice)
+
+tapply(CocaCola$StockPrice,month(CocaCola$Date),mean)
+
+mean(CocaCola$StockPrice)
+
+tapply(ProcterGamble$StockPrice,month(ProcterGamble$Date),mean)
+
+mean(ProcterGamble$StockPrice)
+
+tapply(Boeing$StockPrice,month(Boeing$Date),mean)
+
+mean(Boeing$StockPrice)
+
+#April
 
 #problem 4.3
+#December
 
